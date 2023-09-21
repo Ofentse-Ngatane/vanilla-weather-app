@@ -44,9 +44,21 @@ function displayTemperature(response) {
   iconElement.setAttribute("alt", response.data.condition.description);
 }
 
-let apiKey = "8ad93ca36e804c7caaet5d5bac5b34of";
-let apiUrl =
-  "https://api.shecodes.io/weather/v1/current?query=Johannesburg&key=8ad93ca36e804c7caaet5d5bac5b34of&units=metric";
-console.log(apiUrl);
+function search(city) {
+  let apiKey = "8ad93ca36e804c7caaet5d5bac5b34of";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
-axios.get(apiUrl).then(displayTemperature);
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  console.log(cityInputElement.value);
+  search(cityInputElement.value);
+}
+
+search("Johannesburg");
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
