@@ -31,6 +31,7 @@ function formatDay(timestamp) {
 
 function displayForecast(response) {
   let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
@@ -38,9 +39,10 @@ function displayForecast(response) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
-        `<div class="col"> 
+        `
+        <div class="col-2"> 
             <div class="weather-forecast-date">${formatDay(
-              forecastDay.time * 1000
+              forecastDay.time
             )}</div>
          <img
         src="${forecastDay.condition.icon_url}"
@@ -67,7 +69,6 @@ function displayForecast(response) {
 function getForecast(coordinates) {
   let apiKey = "8ad93ca36e804c7caaet5d5bac5b34of";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}`;
-  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
 
